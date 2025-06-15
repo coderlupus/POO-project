@@ -8,10 +8,10 @@ class CharacterListPage extends StatefulWidget {
   const CharacterListPage({super.key});
 
   @override
-  _CharacterListPageState createState() => _CharacterListPageState();
+  CharacterListPageState createState() => CharacterListPageState();
 }
 
-class _CharacterListPageState extends State<CharacterListPage> {
+class CharacterListPageState extends State<CharacterListPage> {
   late Future<List<Character>> futureCharacters;
   String? filterName;
   String? filterStatus;
@@ -34,14 +34,16 @@ class _CharacterListPageState extends State<CharacterListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Rick and Morty Characters'),
+        title: const Text('Personagens Rick and Morty'),
         actions: [
           IconButton(
-            icon: Icon(Icons.filter_list),
+            icon: const Icon(Icons.filter_list),
             onPressed: () async {
               final filters = await Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => FilterPage(name: filterName, status: filterStatus)),
+                MaterialPageRoute(
+                  builder: (_) => FilterPage(name: filterName, status: filterStatus),
+                ),
               );
               if (filters != null) {
                 _applyFilter(filters['name'], filters['status']);
@@ -60,15 +62,30 @@ class _CharacterListPageState extends State<CharacterListPage> {
               itemBuilder: (context, index) {
                 final character = characters[index];
                 return Card(
-                  margin: EdgeInsets.symmetric(vertical: 6, horizontal: 12),
+                  margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                   child: ListTile(
-                    leading: Image.network(character.image),
-                    title: Text(character.name),
+                    contentPadding: const EdgeInsets.all(8),
+                    leading: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.network(
+                        character.image,
+                        width: 50,
+                        height: 50,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    title: Text(
+                      character.name,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
                     subtitle: Text('${character.species} - ${character.status}'),
+                    trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (_) => CharacterDetailPage(character: character)),
+                        MaterialPageRoute(
+                          builder: (_) => CharacterDetailPage(character: character),
+                        ),
                       );
                     },
                   ),
@@ -76,9 +93,9 @@ class _CharacterListPageState extends State<CharacterListPage> {
               },
             );
           } else if (snapshot.hasError) {
-            return Center(child: Text('Erro ao carregar personagens'));
+            return const Center(child: Text('Erro ao carregar personagens'));
           }
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         },
       ),
     );

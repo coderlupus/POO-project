@@ -22,7 +22,7 @@ class RickAndMortyApi {
       final results = data['results'] as List;
       return results.map((json) => Character.fromJson(json)).toList();
     } else {
-      throw Exception('Failed to load characters');
+      throw Exception('Falha ao carregar personagens');
     }
   }
 }

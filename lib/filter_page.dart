@@ -7,10 +7,10 @@ class FilterPage extends StatefulWidget {
   const FilterPage({super.key, this.name, this.status});
 
   @override
-  _FilterPageState createState() => _FilterPageState();
+  FilterPageState createState() => FilterPageState();
 }
 
-class _FilterPageState extends State<FilterPage> {
+class FilterPageState extends State<FilterPage> {
   final _nameController = TextEditingController();
   String? _status;
 
@@ -40,20 +40,20 @@ class _FilterPageState extends State<FilterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Filtrar Personagens'),
+        title: const Text('Filtrar Personagens'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(20),
         child: Column(
           children: [
             TextField(
               controller: _nameController,
-              decoration: InputDecoration(labelText: 'Nome'),
+              decoration: const InputDecoration(labelText: 'Nome'),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 20),
             DropdownButtonFormField<String>(
               value: _status,
-              decoration: InputDecoration(labelText: 'Status'),
+              decoration: const InputDecoration(labelText: 'Status'),
               items: [null, ...statusOptions].map((status) {
                 return DropdownMenuItem<String>(
                   value: status,
@@ -66,11 +66,11 @@ class _FilterPageState extends State<FilterPage> {
                 });
               },
             ),
-            SizedBox(height: 32),
+            const Spacer(),
             ElevatedButton(
               onPressed: _submit,
-              child: Text('Aplicar filtro'),
-            )
+              child: const Text('Aplicar Filtro'),
+            ),
           ],
         ),
       ),
@@ -79,5 +79,6 @@ class _FilterPageState extends State<FilterPage> {
 }
 
 extension StringExtension on String {
-  String capitalize() => this.isNotEmpty ? '${this[0].toUpperCase()}${substring(1)}' : '';
+  String capitalize() =>
+      isNotEmpty ? '${this[0].toUpperCase()}${substring(1)}' : '';
 }

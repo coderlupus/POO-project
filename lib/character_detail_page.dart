@@ -13,19 +13,27 @@ class CharacterDetailPage extends StatelessWidget {
         title: Text(character.name),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.network(character.image),
-            SizedBox(height: 16),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.network(character.image, height: 300),
+            ),
+            const SizedBox(height: 20),
             Text(
               character.name,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                color: Colors.deepPurple,
+              ),
             ),
-            SizedBox(height: 8),
-            Text('Espécie: ${character.species}'),
-            Text('Status: ${character.status}'),
-            Text('Origem: ${character.originName}'),
+            const SizedBox(height: 10),
+            Text('Espécie: ${character.species}', style: const TextStyle(fontSize: 18)),
+            Text('Status: ${character.status}', style: const TextStyle(fontSize: 18)),
+            Text('Origem: ${character.originName}', style: const TextStyle(fontSize: 18)),
           ],
         ),
       ),
