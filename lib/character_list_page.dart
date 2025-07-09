@@ -74,7 +74,8 @@ class CharacterListPageState extends State<CharacterListPage> {
   void _applyFilter(String? name, String? status) {
     setState(() {
       filterName = name;
-      filterStatus = status;});
+      filterStatus = status;
+    });
     _fetchCharacters(reset: true);
   }
 
@@ -85,7 +86,10 @@ class CharacterListPageState extends State<CharacterListPage> {
         title: const Text('Personagens Rick and Morty'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.filter_list),
+            icon: const Icon(
+              Icons.filter_list,
+              color: Color.fromARGB(255, 0, 217, 255), // cor visível
+            ),
             onPressed: () async {
               final filters = await Navigator.push(
                 context,
@@ -110,29 +114,16 @@ class CharacterListPageState extends State<CharacterListPage> {
                 if (index < _characters.length) {
                   final character = _characters[index];
                   return Card(
+                    elevation: 6,
                     margin: const EdgeInsets.symmetric(
-                      vertical: 8,
-                      horizontal: 16,
+                      vertical: 10,
+                      horizontal: 18,
                     ),
-                    child: ListTile(
-                      contentPadding: const EdgeInsets.all(8),
-                      leading: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Image.network(
-                          character.image,
-                          width: 50,
-                          height: 50,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      title: Text(
-                        character.name,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: Text(
-                        '${character.species} - ${character.status}',
-                      ),
-                      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(16),
                       onTap: () {
                         Navigator.push(
                           context,
@@ -142,6 +133,51 @@ class CharacterListPageState extends State<CharacterListPage> {
                           ),
                         );
                       },
+                      child: Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: Row(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Image.network(
+                                character.image,
+                                width: 70,
+                                height: 70,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            const SizedBox(width: 18),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    character.name,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                      color: Color.fromARGB(255, 0, 217, 255),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 6),
+                                  Text(
+                                    character.species,
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.black87,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const Icon(
+                              Icons.arrow_forward_ios,
+                              size: 18,
+                              color: Colors.black26,
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   );
                 } else {
