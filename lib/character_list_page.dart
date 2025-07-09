@@ -83,7 +83,14 @@ class CharacterListPageState extends State<CharacterListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Personagens Rick and Morty'),
+  centerTitle: true, 
+  title: const Text(
+    'Rick and Morty',
+    style: TextStyle(
+      fontFamily: 'get_schwifty',
+      fontSize: 24,
+    ),
+  ),
         actions: [
           IconButton(
             icon: const Icon(
