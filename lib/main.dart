@@ -16,7 +16,7 @@ class RickAndMortyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: Color.fromARGB(255, 33, 249, 0),
-        cardTheme: const CardTheme(
+        cardTheme: const CardThemeData(
           elevation: 4,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(12)),
