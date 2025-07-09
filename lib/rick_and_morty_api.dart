@@ -5,7 +5,11 @@ import 'character.dart';
 class RickAndMortyApi {
   static const String baseUrl = 'https://rickandmortyapi.com/api';
 
-  static Future<List<Character>> fetchCharacters({String? name, String? status}) async {
+  static Future<List<Character>> fetchCharacters({
+    String? name,
+    String? status,
+    int page = 1,
+  }) async {
     final queryParameters = <String, String>{};
     if (name != null && name.isNotEmpty) {
       queryParameters['name'] = name;
@@ -13,8 +17,11 @@ class RickAndMortyApi {
     if (status != null && status.isNotEmpty) {
       queryParameters['status'] = status;
     }
+    queryParameters['page'] = page.toString();
 
-    final uri = Uri.parse('$baseUrl/character').replace(queryParameters: queryParameters);
+    final uri = Uri.parse(
+      '$baseUrl/character',
+    ).replace(queryParameters: queryParameters);
     final response = await http.get(uri);
 
     if (response.statusCode == 200) {
