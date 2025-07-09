@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'character.dart';
 
 class CharacterDetailPage extends StatelessWidget {
-  final Character character;
+  final Character character; 
 
   const CharacterDetailPage({super.key, required this.character});
 
@@ -27,13 +27,13 @@ class CharacterDetailPage extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
-                color: Colors.deepPurple,
+                color: Color.fromARGB(255, 0, 247, 255),
               ),
             ),
             const SizedBox(height: 10),
-            Text('Espécie: ${character.species}', style: const TextStyle(fontSize: 18)),
+            Text('Species: ${character.species}', style: const TextStyle(fontSize: 18)),
             Text('Status: ${character.status}', style: const TextStyle(fontSize: 18)),
-            Text('Origem: ${character.originName}', style: const TextStyle(fontSize: 18)),
+            Text('Origin: ${character.originName}', style: const TextStyle(fontSize: 18)),
           ],
         ),
       ),
