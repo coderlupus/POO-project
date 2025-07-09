@@ -14,26 +14,32 @@ class RickAndMortyApp extends StatelessWidget {
       title: 'Rick and Morty Flutter',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-        scaffoldBackgroundColor: Colors.grey[100],
-        cardTheme: const CardThemeData(
+        primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: Color.fromARGB(255, 33, 249, 0),
+        cardTheme: const CardTheme(
           elevation: 4,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(12)),
           ),
-          color: Colors.white,
+          color: Color.fromARGB(255, 251, 251, 251),
         ),
         textTheme: const TextTheme(
-          bodyMedium: TextStyle(color: Colors.black87),
+          bodyMedium: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
         ),
         appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.deepPurple,
-          foregroundColor: Colors.white,
+          backgroundColor: Colors.white,
+          foregroundColor: Color.fromARGB(255, 0, 217, 255),
+        ),
+        inputDecorationTheme: const InputDecorationTheme(
+          labelStyle: TextStyle(
+            fontSize: 24,
+            color: Colors.black87,
+          ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.deepPurple,
-            foregroundColor: Colors.white,
+            backgroundColor: Color.fromARGB(255, 0, 247, 255),
+            foregroundColor: Color.fromARGB(255, 0, 217, 255),
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
