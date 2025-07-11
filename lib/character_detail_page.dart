@@ -50,6 +50,7 @@ class CharacterDetailPage extends StatelessWidget {
                         child: Text(
                           character.name,
                           style: const TextStyle(
+                            fontFamily: 'get_schwifty',
                             fontSize: 28,
                             fontWeight: FontWeight.bold,
                             color: Color.fromARGB(255, 0, 217, 255),
