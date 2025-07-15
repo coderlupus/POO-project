@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class FilterPage extends StatefulWidget {
-  final String? name;
+  final String? name; 
   final String? status;
 
   const FilterPage({super.key, this.name, this.status});
@@ -37,45 +37,46 @@ class FilterPageState extends State<FilterPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Filtrar Personagens'),
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(
+      title: const Text('Filtrar Personagens'),
+    ),
+    body: SingleChildScrollView(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          TextField(
+            controller: _nameController,
+            decoration: const InputDecoration(labelText: 'Nome'),
+          ),
+          const SizedBox(height: 20),
+          DropdownButtonFormField<String>(
+            value: _status,
+            decoration: const InputDecoration(labelText: 'Status'),
+            items: [null, ...statusOptions].map((status) {
+              return DropdownMenuItem<String>(
+                value: status,
+                child: Text(status == null ? 'Any' : status.capitalize()),
+              );
+            }).toList(),
+            onChanged: (val) {
+              setState(() {
+                _status = val;
+              });
+            },
+          ),
+          const SizedBox(height: 40), // Espaçamento antes do botão
+          ElevatedButton(
+            onPressed: _submit,
+            child: const Text('Aplicar Filtro'),
+          ),
+        ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            TextField(
-              controller: _nameController,
-              decoration: const InputDecoration(labelText: 'Nome'),
-            ),
-            const SizedBox(height: 20),
-            DropdownButtonFormField<String>(
-              value: _status,
-              decoration: const InputDecoration(labelText: 'Status'),
-              items: [null, ...statusOptions].map((status) {
-                return DropdownMenuItem<String>(
-                  value: status,
-                  child: Text(status == null ? 'Qualquer' : status.capitalize()),
-                );
-              }).toList(),
-              onChanged: (val) {
-                setState(() {
-                  _status = val;
-                });
-              },
-            ),
-            const Spacer(),
-            ElevatedButton(
-              onPressed: _submit,
-              child: const Text('Aplicar Filtro'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+    ),
+  );
+}
 }
 
 extension StringExtension on String {
