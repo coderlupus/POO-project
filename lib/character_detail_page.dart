@@ -9,88 +9,62 @@ class CharacterDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true, // deixa imagem passar atrás da AppBar
       appBar: AppBar(
-        title: Text(character.name),
-        backgroundColor: const Color.fromARGB(255, 0, 217, 255),
-        foregroundColor: Colors.white,
+        title: Text(
+          character.name,
+          style: const TextStyle(fontFamily: 'get_schwifty'),
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
       ),
-      body: Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            children: [
-              Hero(
-                tag: character.image,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(16),
-                  child: Image.network(
-                    character.image,
-                    height: 220,
-                    width: 220,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 24),
-              Card(
-                elevation: 6,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                color: Colors.white,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 24,
-                    horizontal: 20,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Center(
-                        child: Text(
-                          character.name,
-                          style: const TextStyle(
-                            fontFamily: 'get_schwifty',
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 0, 217, 255),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      _infoRow(Icons.person, 'Espécie', character.species),
-                      const SizedBox(height: 10),
-                      _infoRow(Icons.favorite, 'Status', character.status),
-                      const SizedBox(height: 10),
-                      _infoRow(Icons.public, 'Origem', character.originName),
-                    ],
-                  ),
-                ),
-              ),
-            ],
+      body: Stack(
+        children: [
+          Container(
+            color: const Color(0xFF121212), // <- aqui você define a cor desejada
           ),
-        ),
+          SingleChildScrollView(
+            padding: const EdgeInsets.only(
+              top: kToolbarHeight + 32,
+              left: 20,
+              right: 20,
+              bottom: 20,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Image.network(character.image, height: 300),
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  character.name,
+                  style: const TextStyle(
+                    fontFamily: 'get_schwifty',
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  'Species: ${character.species}',
+                  style: const TextStyle(fontSize: 18, color: Color.fromARGB(255, 255, 255, 255)),
+                ),
+                Text(
+                  'Status: ${character.status}',
+                  style: const TextStyle(fontSize: 18, color: Color.fromARGB(255, 255, 255, 255)),
+                ),
+                Text(
+                  'Origin: ${character.originName}',
+                  style: const TextStyle(fontSize: 18, color: Color.fromARGB(255, 255, 255, 255)),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
-    );
-  }
-
-  Widget _infoRow(IconData icon, String label, String value) {
-    return Row(
-      children: [
-        Icon(icon, color: Color.fromARGB(255, 0, 217, 255)),
-        const SizedBox(width: 10),
-        Text(
-          '$label: ',
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-        ),
-        Expanded(
-          child: Text(
-            value,
-            style: const TextStyle(fontSize: 18),
-            overflow: TextOverflow.ellipsis,
-          ),
-        ),
-      ],
     );
   }
 }
